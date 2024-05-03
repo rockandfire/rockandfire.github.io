@@ -687,7 +687,7 @@ const createCards = async () => {
     var varTest = [];
 
     try{
-
+		
 		//get array of all nfts
         let nftCreatedEvents = await contract.methods.getNFT().call()
         .then(function(result) {
@@ -817,7 +817,7 @@ function RecentTx() {
 		useEffect(() => {
 			const interval = setInterval(() => {
 			   createCards();
-			  },10000);
+			  },20000);
 			  return () => clearInterval(interval);
 		}, []);
 	}
