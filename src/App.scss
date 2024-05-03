@@ -1,0 +1,30 @@
+@import '~bootstrap/scss/bootstrap';
+// Color mode variables in _root.scss
+@include color-mode(dark) {
+    // CSS variable overrides here...
+  }
+  $background-color-dark: #292a32;
+  $background-color-light: #fbfaf8;
+  $complimentary-color-dark: #393b43;
+  $complimentary-color-light: #feffff;
+  
+  *.light_mode {
+      background-color: $background-color-light;
+      color: $background-color-dark;
+  }
+  
+  * {
+      background-color: $background-color-dark;
+      color: $background-color-light;
+  }
+
+  #recenttx {
+    float:left; 
+    overflow-y: auto; 
+    height: 650px;
+  }
+
+  .fixed-bottom {
+    float: right;
+    margin: 10px;
+  }
