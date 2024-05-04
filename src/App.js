@@ -80,7 +80,7 @@ let accounts = [];
 async function mintNFT(description, price) {
 	await getAccount();
 
-	const ContractAddress = "0x38566237316d9335AF60a53B6CebEeef4C7eD511";
+	const ContractAddress = "0x33fBB9aCDaDE2fC2C91804e409CE76A910f051B2";
 	const ABI = [
 		{
 			"inputs": [],
@@ -248,6 +248,19 @@ async function mintNFT(description, price) {
 					"internalType": "uint256",
 					"name": "_id",
 					"type": "uint256"
+				}
+			],
+			"name": "NFTDelisted",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": true,
+					"internalType": "uint256",
+					"name": "_id",
+					"type": "uint256"
 				},
 				{
 					"indexed": false,
@@ -370,6 +383,19 @@ async function mintNFT(description, price) {
 			"name": "buyNFT",
 			"outputs": [],
 			"stateMutability": "payable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "id",
+					"type": "uint256"
+				}
+			],
+			"name": "delistNFT",
+			"outputs": [],
+			"stateMutability": "nonpayable",
 			"type": "function"
 		},
 		{

@@ -8,7 +8,7 @@ This is a React project created for CS 5833. The site allows users to connect a 
 
 # Contract Details
 
-This site uses a Solidity smart contract based on OpenZeppelin's ERC721 template. The contract allows users to mint, sell, and buy NFT listings, and metadata such as ID numbers, descriptions, prices, and owners are all stored on-chain. The activity of this contract can be found at https://sepolia.etherscan.io/address/0x2a2e7d814e28043739d0f0d2478c4495a7fdddbb.
+This site uses a Solidity smart contract based on OpenZeppelin's ERC721 template. The contract allows users to mint, sell, and buy NFT listings, and metadata such as ID numbers, descriptions, prices, and owners are all stored on-chain. The activity of this contract can be found at https://sepolia.etherscan.io/address/0x33fBB9aCDaDE2fC2C91804e409CE76A910f051B2.
 This contract was created and deployed on the Sepolia testnet using Remix IDE.
 
 The contract has four major interactions:

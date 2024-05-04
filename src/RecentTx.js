@@ -13,7 +13,7 @@ import { Alert } from 'react-bootstrap';
 //testnet globals
 const { Web3 } = require('web3');
 const web3 = new Web3(`https://sepolia.infura.io/v3/3ebf718a77564b9a942336c7df67582f`);
-const ContractAddress = "0x38566237316d9335AF60a53B6CebEeef4C7eD511";
+const ContractAddress = "0x33fBB9aCDaDE2fC2C91804e409CE76A910f051B2";
 const ABI = [
 	{
 		"inputs": [],
@@ -181,6 +181,19 @@ const ABI = [
 				"internalType": "uint256",
 				"name": "_id",
 				"type": "uint256"
+			}
+		],
+		"name": "NFTDelisted",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
 			},
 			{
 				"indexed": false,
@@ -303,6 +316,19 @@ const ABI = [
 		"name": "buyNFT",
 		"outputs": [],
 		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			}
+		],
+		"name": "delistNFT",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -682,17 +708,19 @@ const createCards = async () => {
         const renderNFT = (card, index) => { 
             let buyButton = <Button variant="primary" onClick={() => buyNFT(card.id, card.price)} disabled>Out of Stock</Button>;
             let sellButton;
-            let priceInfo;
-            let priceInfoDiv;
 
 			//render buy button if for sale
-            if (card.isForSale) {                            
-                buyButton = <Button variant="primary" onClick={() => buyNFT(card.id, card.price)}>Buy NFT</Button>;
+            if (card.isForSale) {    
+				if (card.owner.toLowerCase().localeCompare(accounts[0]) == 0) {
+					buyButton = <Button variant="primary" onClick={() => delistNFT(card.id)}>Delist NFT</Button>;
+				}                        
+                else {
+					buyButton = <Button variant="primary" onClick={() => buyNFT(card.id, card.price)}>Buy NFT</Button>;
+				}
             }
 
 			//render sell button if owned and not for sale
 			if (card.owner.toLowerCase().localeCompare(accounts[0]) == 0 && !card.isForSale) {
-                priceInfo = <input id={index.toString()} type="number" min="0" placeholder={Number(card.price)}></input>
                 	sellButton = <Button variant="primary" onClick={() =>  {
 						let newPrice= "";
 						
@@ -776,6 +804,32 @@ async function buyNFT(tokenId, price) {
 async function sellNFT(tokenId, price) {
 	getAccount();
 	const transaction2 = contract.methods.sellNFT(tokenId, price);
+
+	await window.ethereum // Or window.ethereum if you don't support EIP-6963.
+    .request({
+      method: "eth_sendTransaction",
+      // The following sends an EIP-1559 transaction. Legacy transactions are also supported.
+      params: [
+        {
+			// The user's active address.
+			from: accounts[0],
+			// Required except during contract publications.
+			to: ContractAddress,
+			// Only required to send ether to the recipient from the initiating external account.
+			value: '0x0',
+			// Customizable by the user during MetaMask confirmation.
+			data: transaction2.encodeABI(),
+
+        },
+      ],
+    })
+    .then((txHash) => prompt("Transaction successful. Hash:", txHash))
+    .catch((error) => alert(error));
+}
+
+async function delistNFT(tokenId) {
+	getAccount();
+	const transaction2 = contract.methods.delistNFT(tokenId);
 
 	await window.ethereum // Or window.ethereum if you don't support EIP-6963.
     .request({

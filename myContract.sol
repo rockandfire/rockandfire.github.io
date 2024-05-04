@@ -20,6 +20,7 @@ contract NFTMarketplace is ERC721 {
 
     event NFTMinted(uint256 indexed _id, uint256 _price);
     event NFTForSale(uint256 indexed _id, uint256 _price);
+    event NFTDelisted(uint256 indexed _id);
     event NFTSold(uint256 indexed _id, address _newOwner);
 
     constructor() ERC721("5833 Market", "5833") {
@@ -60,6 +61,17 @@ contract NFTMarketplace is ERC721 {
         nftsInMem[id].isForSale = true;
 
         emit NFTForSale(id, price);
+    }
+
+    //delist nft after sale posted
+    function delistNFT(uint256 id) external {
+        //require delister to own nft
+        require(msg.sender == nftsInMem[id].owner);
+
+        //reset sale bool
+        nftsInMem[id].isForSale = false;
+
+        emit NFTDelisted(id);
     }
 
     //facilitates the purchase of NFT if it is for sale
