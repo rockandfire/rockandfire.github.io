@@ -13,7 +13,7 @@ import { Alert } from 'react-bootstrap';
 //testnet globals
 const { Web3 } = require('web3');
 const web3 = new Web3(`https://sepolia.infura.io/v3/3ebf718a77564b9a942336c7df67582f`);
-const ContractAddress = "0x2a2E7d814e28043739d0F0D2478c4495A7FdDdbb";
+const ContractAddress = "0x38566237316d9335AF60a53B6CebEeef4C7eD511";
 const ABI = [
 	{
 		"inputs": [],
@@ -296,7 +296,7 @@ const ABI = [
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "_tokenId",
+				"name": "id",
 				"type": "uint256"
 			}
 		],
@@ -392,12 +392,12 @@ const ABI = [
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "_owner",
+				"name": "owner",
 				"type": "address"
 			},
 			{
 				"internalType": "uint256",
-				"name": "_price",
+				"name": "price",
 				"type": "uint256"
 			},
 			{
@@ -407,13 +407,7 @@ const ABI = [
 			}
 		],
 		"name": "mintNFT",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
+		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
@@ -431,6 +425,19 @@ const ABI = [
 		"type": "function"
 	},
 	{
+		"inputs": [],
+		"name": "nftId",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "uint256",
@@ -438,7 +445,7 @@ const ABI = [
 				"type": "uint256"
 			}
 		],
-		"name": "nfts",
+		"name": "nftsInMem",
 		"outputs": [
 			{
 				"internalType": "address",
@@ -464,19 +471,6 @@ const ABI = [
 				"internalType": "bool",
 				"name": "isForSale",
 				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "owner",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
 			}
 		],
 		"stateMutability": "view",
@@ -556,12 +550,12 @@ const ABI = [
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "_tokenId",
+				"name": "id",
 				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
-				"name": "_price",
+				"name": "price",
 				"type": "uint256"
 			}
 		],
@@ -615,19 +609,6 @@ const ABI = [
 				"internalType": "string",
 				"name": "",
 				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "tokenId",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
