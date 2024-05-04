@@ -4,7 +4,7 @@
 
 This is a React project created for CS 5833. The site allows users to connect a wallet with Metamask, and mint, sell, and buy NFT listings. Since this site interacts with the Ethereum Sepolia Testnet, there is no conventional backend. All data is pulled directly from the blockchain using Infura, which is then updated periodically to prevent users from interacting with stale listings.
 
-<img width="1512" alt="image" src="https://github.com/rockandfire/rockandfire.github.io/assets/55259268/003361af-0c47-4ed7-8fa4-f84eec18c4cf">
+<img width="1512" alt="Screenshot 2024-05-03 at 10 21 48 PM" src="https://github.com/rockandfire/rockandfire.github.io/assets/55259268/d14758d3-ee2e-4e62-80b9-2ba01c48bef1">
 
 # Contract Details
 
