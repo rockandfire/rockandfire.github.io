@@ -712,8 +712,17 @@ const createCards = async () => {
 			//render sell button if owned and not for sale
 			if (card.owner.toLowerCase().localeCompare(accounts[0]) == 0 && !card.isForSale) {
                 priceInfo = <input id={index.toString()} type="number" min="0" placeholder={Number(card.price)}></input>
-                priceInfoDiv = <div>New price (Wei) {priceInfo}</div>
-                sellButton = <Button variant="primary" onClick={() =>  {sellNFT(card.id, document.getElementById(index.toString()).value)}}>Sell NFT</Button>;
+                	sellButton = <Button variant="primary" onClick={() =>  {
+						let newPrice= "";
+						
+						//check if price is a number
+						while(newPrice.match(/^[0-9]+$/) == null) {
+							newPrice = prompt("Please enter a new price (Wei)");
+						}
+
+						sellNFT(card.id, parseInt(newPrice))
+					}
+				}>Sell NFT</Button>;
             }
 
             return (
@@ -726,7 +735,6 @@ const createCards = async () => {
                                 <div>ID: {card.id.toString()}</div>
                                 <div>Price: {web3.utils.fromWei(card.price.toString(), 'ether')} Eth</div>
                                 <div>Description: {card.description}</div>
-                                {priceInfoDiv}
                             </Card.Text>
                             {buyButton}
                             {sellButton}
@@ -817,7 +825,7 @@ function RecentTx() {
 		useEffect(() => {
 			const interval = setInterval(() => {
 			   createCards();
-			  },20000);
+			  },10000);
 			  return () => clearInterval(interval);
 		}, []);
 	}
